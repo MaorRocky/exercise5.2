@@ -5,13 +5,57 @@
 //  Created by Scores_Main_User on 1/6/21.
 //
 
+
+//The view should have a minimum width and height - 50x25
+
+//The view should have a maximum width and height - 300x60
+//
+//The view’s size should be derived from the label’s text
+//
+//The label should have minimum padding of 8pt from all view’s edges
+
+
+
+
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController
+{
 
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        let myView = UIView()
+        myView.backgroundColor = .red
+        self.view.addSubview(myView)
+       
+     
+        myView.translatesAutoresizingMaskIntoConstraints = false
+        myView.widthAnchor.constraint(lessThanOrEqualToConstant: 300).isActive = true
+        myView.heightAnchor.constraint(lessThanOrEqualToConstant: 60).isActive = true
+        myView.widthAnchor.constraint(greaterThanOrEqualToConstant: 50).isActive = true
+        myView.heightAnchor.constraint(greaterThanOrEqualToConstant: 25).isActive = true
+        myView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        myView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+
+
+
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+        myView.addSubview(label)
+        label.textAlignment = .center
+        label.text = "I'm a test label I'm a test label I'm a test label aaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        label.textColor = .black
+        label.numberOfLines = 0
+    
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.leadingAnchor.constraint(equalTo: myView.leadingAnchor, constant: 8).isActive = true
+        label.topAnchor.constraint(equalTo: myView.topAnchor, constant: 8).isActive = true
+        label.trailingAnchor.constraint(equalTo: myView.trailingAnchor, constant: -8).isActive = true
+        label.bottomAnchor.constraint(equalTo: myView.bottomAnchor, constant: -8).isActive = true
+        
+
+
     }
 
 
