@@ -32,20 +32,20 @@ class ViewController: UIViewController
      
         myView.translatesAutoresizingMaskIntoConstraints = false
         myView.widthAnchor.constraint(lessThanOrEqualToConstant: 300).isActive = true
-        myView.heightAnchor.constraint(lessThanOrEqualToConstant: 60).isActive = true
-        myView.widthAnchor.constraint(greaterThanOrEqualToConstant: 50).isActive = true
-        myView.heightAnchor.constraint(greaterThanOrEqualToConstant: 25).isActive = true
+        myView.heightAnchor.constraint(lessThanOrEqualToConstant: 200).isActive = true
+        myView.widthAnchor.constraint(greaterThanOrEqualToConstant: 100).isActive = true
+        myView.heightAnchor.constraint(greaterThanOrEqualToConstant: 100).isActive = true
         myView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         myView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
 
 
 
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+        let label = VerticalTopAlignLabel(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
         myView.addSubview(label)
-        label.textAlignment = .center
-        label.text = "I'm a test label I'm a test label I'm a test label aaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        label.text = "aaaa"
         label.textColor = .black
         label.numberOfLines = 0
+
     
         
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -58,6 +58,24 @@ class ViewController: UIViewController
 
     }
 
+
+}
+
+class VerticalTopAlignLabel: UILabel {
+
+    override func drawText(in rect:CGRect) {
+        guard let labelText = text else {  return super.drawText(in: rect) }
+
+        let attributedText = NSAttributedString(string: labelText, attributes: [NSAttributedString.Key.font: font ?? "error"])
+        var newRect = rect
+        newRect.size.height = attributedText.boundingRect(with: rect.size, options: .usesLineFragmentOrigin, context: nil).size.height
+
+        if numberOfLines != 0 {
+            newRect.size.height = min(newRect.size.height, CGFloat(numberOfLines) * font.lineHeight)
+        }
+
+        super.drawText(in: newRect)
+    }
 
 }
 
